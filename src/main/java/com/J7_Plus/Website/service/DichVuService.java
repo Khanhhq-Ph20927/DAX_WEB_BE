@@ -1,6 +1,6 @@
 package com.J7_Plus.Website.service;
 
-import com.dax.j7_plus.demo.model.DichVu;
+import com.J7_Plus.Website.model.DichVu;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

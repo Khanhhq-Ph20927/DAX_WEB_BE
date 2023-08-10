@@ -1,7 +1,8 @@
 package com.J7_Plus.Website.controller;
 
-import com.dax.j7_plus.demo.model.DichVu;
-import com.dax.j7_plus.demo.service.DichVuService;
+
+import com.J7_Plus.Website.model.DichVu;
+import com.J7_Plus.Website.service.DichVuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

@@ -1,7 +1,7 @@
 package com.J7_Plus.Website.controller;
 
-import com.dax.j7_plus.demo.model.LoaiDichVu;
-import com.dax.j7_plus.demo.service.LoaiDichVuService;
+import com.J7_Plus.Website.model.LoaiDichVu;
+import com.J7_Plus.Website.service.LoaiDichVuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,8 +20,7 @@ public class LoaiDichVuController {
 
     @GetMapping("/index")
     public List<LoaiDichVu> Show() {
-        List<LoaiDichVu> list = loaiDichVuService.getAll();
-        return list;
+        return loaiDichVuService.getAll();
     }
     @GetMapping("/index/search_ten/{ten}/{number}")
     public Page<LoaiDichVu> searchTen(@PathVariable("ten")String ten, @PathVariable("number") int number) {

@@ -1,6 +1,6 @@
 package com.J7_Plus.Website.repository;
 
-import com.dax.j7_plus.demo.model.LoaiDichVu;
+import com.J7_Plus.Website.model.LoaiDichVu;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
