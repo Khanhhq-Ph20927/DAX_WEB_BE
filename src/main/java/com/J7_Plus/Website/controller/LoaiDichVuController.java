@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -40,10 +41,17 @@ public class LoaiDichVuController {
     }
 
     @PostMapping("/add")
-    public String add(@RequestBody LoaiDichVu loaiDichVu) {
-        loaiDichVu.setNgayTao(LocalDateTime.now());
-        loaiDichVuService.save(loaiDichVu);
-        return "Saved...";
+    public ResponseEntity<String>add(@RequestBody LoaiDichVu loaiDichVu) {
+        if (loaiDichVu.getTen()==null||loaiDichVu.getTen().isEmpty()){
+            return  ResponseEntity.badRequest().body("Tên trống");
+        }else if(loaiDichVu.getTen().length()>50){
+            return  ResponseEntity.badRequest().body("Tên quá ký tự cho phép");
+        }
+        else{
+            loaiDichVu.setNgayTao(LocalDateTime.now());
+            loaiDichVuService.save(loaiDichVu);
+            return ResponseEntity.ok("Thêm mới thành công");
+        }
     }
 
     @PutMapping("/update/{id}")

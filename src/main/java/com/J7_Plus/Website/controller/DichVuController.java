@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -60,10 +61,17 @@ public class DichVuController {
     }
 
     @PostMapping("/add")
-    public String Add(@RequestBody DichVu dichVu) {
-        dichVu.setNgayTao(LocalDateTime.now());
-        dichVuService.save(dichVu);
-        return "Saved...";
+    public ResponseEntity<String> Add(@RequestBody DichVu dichVu) {
+        if (dichVu.getTen()==null||dichVu.getTen().isEmpty()){
+            return  ResponseEntity.badRequest().body("Tên trống");
+        }else if(dichVu.getTen().length()>50){
+            return  ResponseEntity.badRequest().body("Tên quá ký tự cho phép");
+        }else{
+            dichVu.setNgayTao(LocalDateTime.now());
+            dichVuService.save(dichVu);
+            return ResponseEntity.ok("Add thành công");
+        }
+
     }
 
     @GetMapping("/detail/{id}")
