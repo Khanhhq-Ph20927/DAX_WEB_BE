@@ -67,7 +67,6 @@ public class DichVuController {
         }else if(dichVu.getTen().length()>50){
             return  ResponseEntity.badRequest().body("Tên quá ký tự cho phép");
         }else{
-            dichVu.setNgayTao(LocalDateTime.now());
             dichVuService.save(dichVu);
             return ResponseEntity.ok("Add thành công");
         }
@@ -75,19 +74,13 @@ public class DichVuController {
     }
 
     @GetMapping("/detail/{id}")
-    public DichVu detail(@PathVariable(value = "id") UUID id) {
+    public DichVu detail(@PathVariable UUID id) {
         return dichVuService.detail(id);
     }
 
     @PutMapping("/update/{id}")
-    public DichVu update(@PathVariable(value = "id") UUID id, @RequestBody DichVu dichVu) {
-        DichVu dv = dichVuService.detail(id);
-        dv.setTen(dichVu.getTen());
-        dv.setDonGia(dichVu.getDonGia());
-        dv.setLoaiDV(dichVu.getLoaiDV());
-        dv.setNgaySua(LocalDateTime.now());
-        dichVuService.save(dv);
-        return dichVuService.detail(id);
+    public DichVu update(@PathVariable UUID id, @RequestBody DichVu dichVu) {
+        return dichVuService.update(id,dichVu);
     }
 
     @DeleteMapping("/delete/{id}")

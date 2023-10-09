@@ -48,7 +48,6 @@ public class LoaiDichVuController {
             return  ResponseEntity.badRequest().body("Tên quá ký tự cho phép");
         }
         else{
-            loaiDichVu.setNgayTao(LocalDateTime.now());
             loaiDichVuService.save(loaiDichVu);
             return ResponseEntity.ok("Thêm mới thành công");
         }
@@ -56,11 +55,7 @@ public class LoaiDichVuController {
 
     @PutMapping("/update/{id}")
     public LoaiDichVu update(@PathVariable Integer id, @RequestBody LoaiDichVu loaiDichVu) {
-        LoaiDichVu ldv = loaiDichVuService.detail(id);
-        ldv.setNgaySua(LocalDateTime.now());
-        ldv.setTen(loaiDichVu.getTen());
-        loaiDichVuService.save(ldv);
-        return loaiDichVuService.detail(id);
+        return loaiDichVuService.update(id,loaiDichVu);
     }
 
     @GetMapping("/detail/{id}")

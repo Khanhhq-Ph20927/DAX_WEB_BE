@@ -13,6 +13,8 @@ public interface LoaiDichVuService {
 
     void save(LoaiDichVu loaiDichVu);
 
+    LoaiDichVu update(Integer id, LoaiDichVu loaiDichVu);
+
     LoaiDichVu detail(Integer Id);
 
     void delete(Integer Id);
@@ -21,5 +23,5 @@ public interface LoaiDichVuService {
 //
 //    Page<LoaiDichVu> findAllSort(String field);
 
-    Page<LoaiDichVu> Pagination(int offset,int pageSize);
+    Page<LoaiDichVu> Pagination(int offset, int pageSize);
 }

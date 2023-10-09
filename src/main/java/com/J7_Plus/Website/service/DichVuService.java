@@ -14,11 +14,15 @@ public interface DichVuService {
 
     void save(DichVu dichVu);
 
+    DichVu update(UUID Id, DichVu dichVu);
+
     DichVu detail(UUID Id);
 
     void delete(UUID Id);
 
-    Page<DichVu> findAllTen(String ten, Pageable pageable);;
+    Page<DichVu> findAllTen(String ten, Pageable pageable);
+
+    ;
 
     Page<DichVu> findAllLoaiDV(Integer id, Pageable pageable);
 

@@ -8,13 +8,15 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 
 @Service
 public class LoaiDichVuServiceImpl implements LoaiDichVuService {
-   @Autowired
-   private LoaiDichVuRepository loaiDichVuRepository;
+    @Autowired
+    private LoaiDichVuRepository loaiDichVuRepository;
+
     @Override
     public List<LoaiDichVu> getAll() {
         return loaiDichVuRepository.findAll();
@@ -27,7 +29,16 @@ public class LoaiDichVuServiceImpl implements LoaiDichVuService {
 
     @Override
     public void save(LoaiDichVu loaiDichVu) {
+        loaiDichVu.setNgayTao(LocalDateTime.now());
         loaiDichVuRepository.save(loaiDichVu);
+    }
+
+    @Override
+    public LoaiDichVu update(Integer id, LoaiDichVu loaiDichVu) {
+        LoaiDichVu ldv = loaiDichVuRepository.findById(id).get();
+        ldv.setNgaySua(LocalDateTime.now());
+        ldv.setTen(loaiDichVu.getTen());
+        return loaiDichVuRepository.save(ldv);
     }
 
     @Override
@@ -42,7 +53,7 @@ public class LoaiDichVuServiceImpl implements LoaiDichVuService {
 
     @Override
     public Page<LoaiDichVu> findAllTen(String ten, Pageable pageable) {
-        return loaiDichVuRepository.findAllTen(ten,pageable);
+        return loaiDichVuRepository.findAllTen(ten, pageable);
     }
 
     @Override

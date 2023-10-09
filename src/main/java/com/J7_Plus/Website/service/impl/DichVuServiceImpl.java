@@ -10,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -29,7 +30,18 @@ public class DichVuServiceImpl implements DichVuService {
 
     @Override
     public void save(DichVu dichVu) {
+        dichVu.setNgayTao(LocalDateTime.now());
         dichVuRepository.save(dichVu);
+    }
+
+    @Override
+    public DichVu update(UUID Id, DichVu dichVu) {
+        DichVu dv = dichVuRepository.findById(Id).get();
+        dv.setTen(dichVu.getTen());
+        dv.setDonGia(dichVu.getDonGia());
+        dv.setLoaiDV(dichVu.getLoaiDV());
+        dv.setNgaySua(LocalDateTime.now());
+        return dichVuRepository.save(dv);
     }
 
     @Override
@@ -49,7 +61,6 @@ public class DichVuServiceImpl implements DichVuService {
 
     @Override
     public Page<DichVu> findAllLoaiDV(Integer id, Pageable pageable) {
-
         return dichVuRepository.findAllLoaiDV(id, pageable);
     }
 
